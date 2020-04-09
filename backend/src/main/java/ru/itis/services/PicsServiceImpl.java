@@ -33,7 +33,7 @@ public class PicsServiceImpl implements PicsService {
             throw new IllegalArgumentException(e);
         }
         Post post = Post.builder()
-                .pic_name(picName)
+                .picName(picName)
                 .user(user)
                 .build();
         System.out.println(user.getRole());

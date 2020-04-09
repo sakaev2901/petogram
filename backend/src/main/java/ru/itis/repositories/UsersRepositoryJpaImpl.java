@@ -19,6 +19,7 @@ public class UsersRepositoryJpaImpl implements UsersRepository {
     }
 
     @Override
+    @Transactional
     public User findByUsername(String username) {
         User user = entityManager.createQuery("select c from User c where c.username = :username", User.class)
                 .setParameter("username", username)

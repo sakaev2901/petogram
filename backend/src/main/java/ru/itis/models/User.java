@@ -1,10 +1,7 @@
 package ru.itis.models;
 
 import javafx.geometry.Pos;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,8 +29,9 @@ public class User implements UserDetails {
     private Boolean enabled;
     private String role = "ROLE_USER";
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private List<Post> posts;
 
     @Override

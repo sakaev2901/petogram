@@ -35,11 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                  .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login", "/").permitAll()
                 .antMatchers("/profile")
                 .hasRole("USER")
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/**")
+                .permitAll()
                 .and()
                     .formLogin()
 
@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                        .usernameParameter("username")
 //                        .passwordParameter("password")
 //                        .loginProcessingUrl("/auth")
-                        .defaultSuccessUrl("/picUpload", true)
+                        .defaultSuccessUrl("/profile", true)
 //                        .failureUrl("/")
 //                        .permitAll()
                 .and()

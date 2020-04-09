@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +10,7 @@
 <body>
     <div>
         Home Page
+        <img src="/img/pic.jpg">
     </div>
 </body>
 </html>

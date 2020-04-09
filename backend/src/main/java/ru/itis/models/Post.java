@@ -1,9 +1,6 @@
 package ru.itis.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -22,8 +19,11 @@ public class Post {
     private Long id;
     @Column(name = "timestamp",  columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
     private Timestamp timestamp;
-    private String pic_name;
+    private String picName;
 
     @ManyToOne
+    @ToString.Exclude
     private User user;
+
+    
 }
