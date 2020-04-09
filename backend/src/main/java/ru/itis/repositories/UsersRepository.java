@@ -7,4 +7,6 @@ import ru.itis.models.User;
 public interface UsersRepository {
 
     void save(User model);
+
+    User findByUsername(String username);
 }

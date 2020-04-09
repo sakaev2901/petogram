@@ -17,4 +17,14 @@ public class UsersRepositoryJpaImpl implements UsersRepository {
     public void save(User model) {
         entityManager.persist(model);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        User user = entityManager.createQuery("select c from users c where c.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+        return user;
+    }
+
+
 }
