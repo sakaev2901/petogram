@@ -1,5 +1,6 @@
 package ru.itis.models;
 
+import javafx.geometry.Pos;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,6 +31,10 @@ public class User implements UserDetails {
     private String password;
     private Boolean enabled;
     private String role = "ROLE_USER";
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Post> posts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

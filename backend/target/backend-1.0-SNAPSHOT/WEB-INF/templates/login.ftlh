@@ -1,24 +1,25 @@
-<!doctype html>
-<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Taco Cloud</title>
 </head>
 <body>
-    Hello, world!
-    <div>
-        <form method="post" action="/login" id="loginForm">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Войти">
-            <input
-                    type="hidden"
-                    th:name="${_csrf.parameterName}"
-                    th:value="${_csrf.token}" />
-        </form>
-    </div>
+<h1>Login</h1>
+<img th:src="@{/images/TacoCloud.png}"/>
+<#--<div th:if="${error}">-->
+<#--    Unable to login. Check your username and password.-->
+<#--</div>-->
+<p>New here? Click
+    <a th:href="@{/register}">here</a> to register.</p>
+<!-- tag::thAction[] -->
+<form method="POST" th:action="@{/login}" id="loginForm">
+    <!-- end::thAction[] -->
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username" /><br/>
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password" /><br/>
+    <input type="submit" value="Login"/>
+</form>
 </body>
 </html>

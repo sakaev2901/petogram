@@ -114,9 +114,9 @@ public class ApplicationContextConfig implements WebMvcConfigurer {
         return passwordEncoder;
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("login");
-        registry.addViewController("/login");
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("home");
+//        registry.addViewController("/login");
+//    }
 }
