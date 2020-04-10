@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import ru.itis.models.Like;
 import ru.itis.models.Post;
 import ru.itis.models.User;
 import ru.itis.repositories.PostsRepository;
@@ -21,11 +22,17 @@ public class Test {
                 .id(2l)
                 .build();
         Post post = Post.builder()
+                .id(10l)
                 .user(user)
-                .picName("name")
+//                .picName("name")
                 .build();
-        postsRepository.save(post);
+//        postsRepository.save(post);
         List<Post> posts = usersRepository.findByUsername("user").getPosts();
+        Like like = Like.builder()
+                .post(post)
+                .user(user)
+                .build();
+        postsRepository.saveLike(like);
         System.out.println(4);
     }
 }

@@ -8,20 +8,29 @@
     <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
     <title>Document</title>
 </head>
-<body>
-<main style="width: 400px; margin: 0 auto">
-                 <#list posts as post>
-                          <div style="margin: 50px 0">
-                                      <img style="width: 400px" src="/img/${post.getPicName()}">
-                                        <button span-id="likeCount${post.id}" class="like" onclick="like()">
-                                            Like
-                                        </button>
-                                        <span id="likeCount${post.id}">5</span>
+<body style="margin: 0; padding: 0">
+<header style="height: 80px; background-color: #B03F39; font-weight: bold; font-size: 20px; color: white">
 
-                              </div>
-                         </#list>
+</header>
+<main>
+    <div style="width: 80%; margin: 0 auto; background-color: antiquewhite">
+        <div style="width: 530px; margin: 0 auto; padding-top: 50px;">
+            <#list posts as post>
+                <div style="margin-bottom: 50px; padding: 10px; border: 2px gray solid">
+                    <img style="width: 506px" src="/img/${post.getPicName()}">
+                    <button span-id="${post.id}" class="like" onclick="like()">
+                        Like
+                    </button>
+                    <span id="likeCount${post.id}">${post.getLikes()?size}</span>
+
+                </div>
+            </#list>
+
+        </div>
+    </div>
 
 </main>
+
 
 <script>
 
@@ -35,12 +44,21 @@
         $('.like').click(function () {
             var id = this.getAttribute('span-id')
             console.log(id)
-            var el = document.getElementById(id)
+            var el = document.getElementById('likeCount' + id)
             var likeCount = el.innerHTML;
             console.log(likeCount)
             el.innerHTML = ++likeCount;
+            // $.ajax({
+            //     type: "POST",
+            //     url: "http://localhost:8080/like",
+            //     data: JSON.stringify({postId: id}),
+            //     dataType: "json",
+            //     processData: false,
+            //     contentType: "application/json"
+            // })
+            $.get("http://localhost:8080/like/" + id)
         })
-    
+
 </script>
 </body>
 </html>

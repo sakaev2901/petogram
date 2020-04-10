@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,5 +26,8 @@ public class Post {
     @ToString.Exclude
     private User user;
 
-    
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private List<Like> likes;
+
 }

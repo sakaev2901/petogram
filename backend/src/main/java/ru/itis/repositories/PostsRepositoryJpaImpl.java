@@ -3,6 +3,7 @@ package ru.itis.repositories;
 import javafx.geometry.Pos;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ru.itis.models.Like;
 import ru.itis.models.Post;
 import ru.itis.models.User;
 
@@ -49,6 +50,12 @@ public class PostsRepositoryJpaImpl implements PostsRepository {
         return entityManager.createQuery("select c from Post c where c.user = :user")
                 .setParameter("user", user)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void saveLike(Like like) {
+        entityManager.persist(like);
     }
 
     @Override
