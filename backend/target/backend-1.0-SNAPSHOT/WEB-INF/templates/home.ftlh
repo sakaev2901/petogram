@@ -10,7 +10,7 @@
 <body>
     <div>
         Home Page
-        <img src="/img/pic.jpg">
+        <img src="/image/pic.jpg">
     </div>
 </body>
 </html>

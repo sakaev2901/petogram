@@ -9,15 +9,64 @@
     <title>Document</title>
 </head>
 <body style="margin: 0; padding: 0">
-<header style="height: 80px; background-color: #B03F39; font-weight: bold; font-size: 20px; color: white">
+<header style=" background-color: #B03F39; font-weight: bold; font-size: 20px; color: white">
+    ${user.getName()} ${user.getUsername()}
+    <#if currentUser == user.getUsername()>
+        <form action="#">
+            <input type="submit" value="Settings">
+        </form>
+        <form action="/logout">
+            <input type="submit" value="Logout">
+        </form>
+        <form action="/feed">
+            <input type="submit" value="Feed">
+        </form>
+        <form action="/picUpload">
+            <input type="submit" value="Upload Pic">
+        </form>
+    <#else>
+        <button id="follow_btn">
+            Subscribe
+        </button>
+        <form action="#">
+            <input type="submit" value="Unsubscribe">
+        </form>
+    </#if>
 
+    <div>
+        <h3>Followers</h3>
+        <#if user.getFollowers()??>
+            <#list user.getFollowers() as follower>
+                <div>
+                    <a href="/profile/${follower.username}">
+                        ${follower.username}
+                    </a>
+                </div>
+            </#list>
+        </#if>
+    </div>
+    <div>
+        <h3>Followings</h3>
+        <#if user.getFollowings()??>
+            <#list user.getFollowings() as following>
+                <div>
+                    <a href="/profile/${following.username}">
+                        ${following.username}
+                    </a>
+                </div>
+            </#list>
+        </#if>
+    </div>
 </header>
 <main>
+    ${springMacroRequestContext.getContextPath()}
+    ${rc.getContextPath()}
     <div style="width: 80%; margin: 0 auto; background-color: antiquewhite">
         <div style="width: 530px; margin: 0 auto; padding-top: 50px;">
-            <#list posts as post>
+            <#list user.getPosts() as post>
                 <div style="margin-bottom: 50px; padding: 10px; border: 2px gray solid">
-                    <img style="width: 506px" src="/img/${post.getPicName()}">
+
+                    <img style="width: 506px" src="/image/${post.getPicName()}">
                     <button span-id="${post.id}" class="like" onclick="like()">
                         Like
                     </button>
@@ -42,11 +91,11 @@
     //     el.innerHTML = likeCount;
 
         $('.like').click(function () {
-            var id = this.getAttribute('span-id')
-            console.log(id)
-            var el = document.getElementById('likeCount' + id)
+            var id = this.getAttribute('span-id');
+            console.log(id);
+            var el = document.getElementById('likeCount' + id);
             var likeCount = el.innerHTML;
-            console.log(likeCount)
+            console.log(likeCount);
             el.innerHTML = ++likeCount;
             // $.ajax({
             //     type: "POST",
@@ -58,6 +107,26 @@
             // })
             $.get("http://localhost:8080/like/" + id)
         })
+
+    $('#follow_btn').click(function () {
+        var username = "${user.username}"
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/follow',
+            // data: JSON.stringify({id: id}),
+            data: {
+                username: username
+            },
+            // contentType: "application/json; charset=utf-8",
+            // dataType: "json",
+            success: function (data) {
+                alert(data)
+            },
+            fail: function (errMsg) {
+                alert(errMsg)
+            }
+        })
+    })
 
 </script>
 </body>

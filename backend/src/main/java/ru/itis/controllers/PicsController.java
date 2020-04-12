@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.itis.models.User;
 import ru.itis.repositories.UsersRepository;
 import ru.itis.services.PicsService;
+import ru.itis.services.UsersService;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -21,22 +22,20 @@ import java.security.Principal;
 public class PicsController {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UsersService usersService;
     @Autowired
     private PicsService picsService;
 
     @RequestMapping(value = "/picUpload", method = RequestMethod.GET)
-    public ModelAndView getPage() {
+    public ModelAndView getPage(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("picUpload");
+        modelAndView.addObject("username", principal.getName());
         return modelAndView;
     }
 
     @SneakyThrows
     @RequestMapping(value = "/picUpload", method = RequestMethod.POST)
     public void savePhoto(@RequestParam("file")MultipartFile multipartFile, Principal principal) {
-        User user = usersRepository.findByUsername(principal.getName());
-
-//        System.out.println("Success");
-        picsService.save(multipartFile, user);
+        picsService.save(multipartFile);
     }
 }

@@ -50,6 +50,7 @@ public class PostsRepositoryJpaImpl implements PostsRepository {
         return entityManager.createQuery("select c from Post c where c.user = :user")
                 .setParameter("user", user)
                 .getResultList();
+
     }
 
     @Override

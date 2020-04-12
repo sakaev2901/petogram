@@ -36,24 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login", "/").permitAll()
-                .antMatchers("/profile")
+                .antMatchers("/profile/**", "/feed", "/picUpload")
                 .hasRole("USER")
                 .antMatchers("/**")
                 .permitAll()
                 .and()
                     .formLogin()
-
-//                        .loginPage("/login")
-//                        .usernameParameter("username")
-//                        .passwordParameter("password")
-//                        .loginProcessingUrl("/auth")
-                        .defaultSuccessUrl("/profile", true)
-//                        .failureUrl("/")
-//                        .permitAll()
+                        .defaultSuccessUrl("/feed", true)
                 .and()
                     .logout()
                         .logoutSuccessUrl("/login")
                 ;
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/img/**");
+    }
 }

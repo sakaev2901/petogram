@@ -48,6 +48,7 @@ public class ApplicationContextConfig implements WebMvcConfigurer {
         resolver.setCache(true);
         resolver.setPrefix("");
         resolver.setSuffix(".ftlh");
+        resolver.setRequestContextAttribute("rc");
         return resolver;
     }
 
@@ -119,13 +120,10 @@ public class ApplicationContextConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("/img/")
-                .addResourceLocations("classpath:/img/");
+//                .addResourceLocations("/img/")
+                .addResourceLocations("classpath:/img/")
+                ;
 
     }
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("home");
-//        registry.addViewController("/login");
-//    }
+
 }

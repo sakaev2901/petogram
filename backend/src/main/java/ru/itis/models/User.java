@@ -1,6 +1,5 @@
 package ru.itis.models;
 
-import javafx.geometry.Pos;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -33,6 +33,20 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private List<Post> posts;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_followings"
+    )
+    private List<User> followings;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_followers"
+    )
+    private List<User> followers;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -62,5 +76,19 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addFollower(User follower) {
+        if (followers == null) {
+            followers = new LinkedList<>();
+        }
+        followers.add(follower);
+    }
+
+    public void addFollowing(User following) {
+        if (followings == null) {
+            followings = new LinkedList<>();
+        }
+        followings.add(following);
     }
 }

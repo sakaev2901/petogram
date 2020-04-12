@@ -6,8 +6,10 @@ import ru.itis.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Component
+@Transactional
 public class UsersRepositoryJpaImpl implements UsersRepository {
 
     @PersistenceContext
@@ -27,5 +29,16 @@ public class UsersRepositoryJpaImpl implements UsersRepository {
         return user;
     }
 
+    @Override
+    @Transactional
+    public void update(User user, User following) {
+        entityManager.detach(user);
+        user.addFollowing(following);
+        entityManager.merge(user);
+    }
 
+    @Override
+    public List<User> findAll() {
+        return null;
+    }
 }

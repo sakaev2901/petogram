@@ -6,6 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
 import ru.itis.models.User;
 
+import java.io.InputStream;
+
 public interface PicsService {
-    public void save(MultipartFile multipartFile, User user);
+    void save(MultipartFile multipartFile);
+    InputStream getImageInputStream(String imageName);
 }

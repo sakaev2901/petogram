@@ -23,24 +23,32 @@
                 data: formData,
                 processData: false,
                 contentType: false
-            }).done(function (response) {
-                alert(response)
-            }).fail(function () {
-                alert('Error')
             })
 
         }
     </script>
 </head>
-<body>
-    <div>
-        <input type="file" id="file" name="file" placeholder="File name">
-        <button onclick="sendFile()">
-            Upload
-        </button>
+<body style="margin: 0; padding: 0;">
+<header style="min-height: 80px; background-color: #B03F39; font-weight: bold; font-size: 20px; color: white">
+    <form action="/feed">
+        <input type="submit" value="Feed">
+    </form>
+    <form action="/profile/${username}">
+        <input type="submit" value="Profile">
+    </form>
+</header>
+<main>
+    <div style="height: 100vh; width: 80%; margin: 0 auto; background-color: antiquewhite">
+        <div style="width: 530px; margin: 0 auto; padding-top: 50px;">
+            <div>
+                <input type="file" id="file" name="file" placeholder="File name">
+                <button onclick="sendFile()">
+                    Upload
+                </button>
 
+            </div>
+        </div>
     </div>
-
-
+</main>
 </body>
 </html>
