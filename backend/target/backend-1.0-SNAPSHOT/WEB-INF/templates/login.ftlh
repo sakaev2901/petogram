@@ -6,12 +6,12 @@
 </head>
 <body>
 <h1>Login</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
+<#--<img th:src="@{/images/TacoCloud.png}"/>-->
 <#--<div th:if="${error}">-->
 <#--    Unable to login. Check your username and password.-->
 <#--</div>-->
-<p>New here? Click
-    <a th:href="@{/register}">here</a> to register.</p>
+<#--<p>New here? Click-->
+<#--    <a th:href="@{/register}">here</a> to register.</p>-->
 <!-- tag::thAction[] -->
 <form method="POST" th:action="@{/login}" id="loginForm">
     <!-- end::thAction[] -->
@@ -19,6 +19,10 @@
     <input type="text" name="username" id="username" /><br/>
     <label for="password">Password: </label>
     <input type="password" name="password" id="password" /><br/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <label>
+        <input type="checkbox" name="remember-me">Remember me
+    </label>
     <input type="submit" value="Login"/>
 </form>
 </body>

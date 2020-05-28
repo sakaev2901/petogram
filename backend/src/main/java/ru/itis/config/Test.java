@@ -20,7 +20,9 @@ public class Test {
         PostsRepository postsRepository = applicationContext.getBean(PostsRepository.class);
         UsersRepository usersRepository = applicationContext.getBean(UsersRepository.class);
         System.out.println(postsRepository);
+        User following = usersRepository.findByUsername("andrey");
         User user = usersRepository.findByUsername("user");
+        usersRepository.update(user, following);
 //        user.getFollowers().clear();
 //        user.getFollowings().clear();
 //        usersRepository.update(user);

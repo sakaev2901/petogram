@@ -23,22 +23,34 @@ public class UsersRepositoryJpaImpl implements UsersRepository {
     @Override
     @Transactional
     public User findByUsername(String username) {
-        User user = entityManager.createQuery("select c from User c where c.username = :username", User.class)
-                .setParameter("username", username)
-                .getSingleResult();
+            User user = entityManager.createQuery("select c from User c where c.username = :username", User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
         return user;
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public void update(User user, User following) {
-        entityManager.detach(user);
+
         user.addFollowing(following);
         entityManager.merge(user);
+        entityManager.flush();
     }
 
     @Override
     public List<User> findAll() {
         return null;
+    }
+
+    @Override
+    public void saveFollowing(User following) {
+        String username = "user";
+        User user = entityManager.createQuery("select c from User c where c.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+        entityManager.detach(user);
+        user.addFollowing(following);
+        entityManager.merge(user);
     }
 }

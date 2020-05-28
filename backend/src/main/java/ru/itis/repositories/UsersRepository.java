@@ -12,4 +12,5 @@ public interface UsersRepository {
     User findByUsername(String username);
     void update(User user, User following);
     List<User> findAll();
+    void saveFollowing(User following);
 }

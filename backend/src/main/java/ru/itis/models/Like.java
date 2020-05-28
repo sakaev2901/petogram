@@ -3,6 +3,7 @@ package ru.itis.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "likes")
-public class Like {
+public class Like implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
