@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    <@spring.bind "registrationForm"/>
     <form method="post">
         <div>
             <input type="text" name="name" placeholder="Name">
@@ -16,11 +17,14 @@
             <input type="text" name="username" placeholder="Username">
         </div>
         <div>
+<#--            <@spring.formInput "registrationForm.mail"/>-->
+<#--            <@spring.showErrors/>-->
             <input type="text" name="mail" placeholder="Mail">
         </div>
         <div>
             <input type="password" name="password" placeholder="Password">
         </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div>
             <input type="submit">
         </div>

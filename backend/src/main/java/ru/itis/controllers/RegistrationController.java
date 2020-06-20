@@ -31,7 +31,7 @@ public class RegistrationController {
     public void processRegistration(@Valid RegistrationForm registrationForm, BindingResult bindingResult) {
         System.out.println(registrationForm);
         System.out.println(bindingResult);
-        usersRepository.save(registrationForm.toUser(passwordEncoder));
+//        usersRepository.save(registrationForm.toUser(passwordEncoder));
 //        return "redirect:/login";
     }
 

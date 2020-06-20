@@ -13,13 +13,13 @@
 <#--<p>New here? Click-->
 <#--    <a th:href="@{/register}">here</a> to register.</p>-->
 <!-- tag::thAction[] -->
-<form method="POST" th:action="@{/login}" id="loginForm">
+    <form method="POST" th:action="@{/login}" id="loginForm">
     <!-- end::thAction[] -->
     <label for="username">Username: </label>
     <input type="text" name="username" id="username" /><br/>
     <label for="password">Password: </label>
     <input type="password" name="password" id="password" /><br/>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
     <label>
         <input type="checkbox" name="remember-me">Remember me
     </label>
